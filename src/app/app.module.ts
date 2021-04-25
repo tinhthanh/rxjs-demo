@@ -11,6 +11,7 @@ import { RxjsSubjectComponent } from './rxjs-subject/rxjs-subject.component';
 import { RxjsCombinationComponent } from './rxjs-combination/rxjs-combination.component';
 import { SearchComponent } from './components/search/search.component';
 import { HttpClientModule} from '@angular/common/http';
+import { CreateObservableComponent } from './create-observable/create-observable.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,9 @@ import { HttpClientModule} from '@angular/common/http';
     RxjsShareReplayComponent,
     RxjsSubjectComponent,
     RxjsCombinationComponent,
-    SearchComponent
+    SearchComponent,
+    CreateObservableComponent,
+    CreateObservableComponent
   ],
   imports: [
     BrowserModule,

@@ -65,6 +65,5 @@ private loadWords(text: string): Observable<string[]> {
     switchMap(() => this.httpClient.get<[ string, string[] ]>(url)),
     map(data => data[1])
   )
-   
 }
 }

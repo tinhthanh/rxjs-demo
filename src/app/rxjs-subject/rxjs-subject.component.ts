@@ -18,7 +18,7 @@ export class RxjsSubjectComponent implements OnInit {
    //BehaviorSubject
   // this.chapter3() ;
 // ReplaySubject
-  // this.chapter4() ;
+  this.chapter4() ;
   }
  chapter1() {
       const sub = new Subject();
@@ -26,7 +26,9 @@ export class RxjsSubjectComponent implements OnInit {
     //   sub.subscribe(x => {
     //     console.log('Subscriber A', x);
     //   });
-    //  sub.next(2);
+
+    
+      sub.next(2);
       sub.subscribe(x => {
         console.log('Subscriber B', x);
       });
@@ -34,16 +36,16 @@ export class RxjsSubjectComponent implements OnInit {
  }
  chapter2() {
     const sub = new AsyncSubject();
-    // sub.next(1);
-    // sub.subscribe(x => {
-    //   console.log('Subscriber A', x);
-    // });
-    // sub.next(2);
+    sub.next(1);
     sub.subscribe(x => {
-      console.log('Subscriber B', x);
+      console.log('Subscriber A', x);
     });
+     sub.next(2);
+      sub.subscribe(x => {
+        console.log('Subscriber B', x);
+      });
     sub.next(3); 
-    // sub.complete(); 
+    sub.complete(); 
 }
 chapter3() {
   const subject = new BehaviorSubject(123);
@@ -57,14 +59,13 @@ chapter3() {
 chapter4() {
   
 const sub = new ReplaySubject(2);
-sub.next(1);
-sub.next(2);
+    sub.next(1);
+    sub.next(2);
+    sub.subscribe(console.log); 
 
-sub.subscribe(console.log); 
-
-sub.next(3); 
-sub.next(4); 
-sub.subscribe(console.log); 
-sub.next(5); 
+    sub.next(3); 
+    sub.next(4); 
+    sub.subscribe(console.log); 
+    sub.next(5); 
 }
 }

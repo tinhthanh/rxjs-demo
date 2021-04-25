@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CreateObservableComponent } from './create-observable/create-observable.component';
 import { RxjsCombinationComponent } from './rxjs-combination/rxjs-combination.component';
 import { RxjsShareReplayComponent } from './rxjs-share-replay/rxjs-share-replay.component';
 import { RxjsShareComponent } from './rxjs-share/rxjs-share.component';
 import { RxjsSubjectComponent } from './rxjs-subject/rxjs-subject.component';
 
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
+    path:'chapter-1',
+    component: CreateObservableComponent
+  },
+  {
     path:'rxjs-comination',
     component: RxjsCombinationComponent
   } ,
