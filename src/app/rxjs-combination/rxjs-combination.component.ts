@@ -125,22 +125,17 @@ export class RxjsCombinationComponent implements OnInit {
   // Uses forkJoin
   dataForUser$ = this.userSelectedAction$
     .pipe(
-      // Handle the case of no selection
       filter(userName => Boolean(userName)),
       tap(console.log),
-      // Get the user given the user name
       switchMap(userName => this.http.get<User[]>(`${this.userUrl}?username=${userName}`)
         .pipe(
-          // The query returns an array of users, we only want the first one
           map(users => users[0]),
           switchMap(user =>
-            // Pull in any related streams
             forkJoin([
               this.http.get<ToDo[]>(`${this.todoUrl}?userId=${user.id}`),
               this.http.get<Post[]>(`${this.postUrl}?userId=${user.id}`)
             ])
               .pipe(
-                // Map the data into the desired format for display
                 map(([todos, posts]) => ({
                   name: user.name,
                   todos: todos,

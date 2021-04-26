@@ -13,7 +13,7 @@ export class RxjsShareReplayComponent implements OnInit, OnDestroy {
   constructor() {
     // chapter 1
 
-    // this.chapter1();
+    this.chapter1();
 
     // chapter 3
     //  this.chapter3();
@@ -26,20 +26,11 @@ export class RxjsShareReplayComponent implements OnInit, OnDestroy {
   chapter1() {
     const user = new Subject<{ setting: any, id: string }>();
     const sub = user.pipe(
-      // pluck('url'),
-      share(),
-      // shareReplay(1),
-      takeUntil(this.sub)
+      shareReplay(1), 
     );
-
-    // initial subscriber required
-    // sub.pipe(map(z => z.setting),distinctUntilChanged((prev, curr) => prev.balance === curr.balance)).subscribe(console.log);
-    sub.pipe(map(z => z.setting)).subscribe(console.log);
-
     sub.pipe(map(z => z.id)).subscribe(console.log);
      user.next({ setting: { balance: 1 }, id: '503' });
      user.next({setting: {balance: 1}, id: '504'});
-
     // nothing logged
      sub.subscribe(console.log);
   }
