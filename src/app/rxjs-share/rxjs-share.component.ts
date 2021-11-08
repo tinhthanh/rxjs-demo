@@ -1,34 +1,34 @@
-
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import {share, takeUntil} from 'rxjs/operators';
-import { DestroyService } from '../destroy.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { share, takeUntil } from "rxjs/operators";
+import { DestroyService } from "../destroy.service";
 
 @Component({
-  selector: 'app-rxjs-share',
-  templateUrl: './rxjs-share.component.html',
-  styleUrls: ['./rxjs-share.component.scss'],
-  providers: [DestroyService]
+  selector: "app-rxjs-share",
+  templateUrl: "./rxjs-share.component.html",
+  styleUrls: ["./rxjs-share.component.scss"],
+  providers: [DestroyService],
 })
-export class RxjsShareComponent  implements OnDestroy {
+export class RxjsShareComponent implements OnDestroy {
   sub: Subject<void> = new Subject();
   socket = new WebSockerFake("ws://someurl");
   a = "";
   b = "";
-  
+
   constructor(private readonly $destroy: DestroyService) {
-    const source = new Observable(observer => {
-      this.socket.addEventListener("message", e => observer.next(e));
+    const source = new Observable((observer) => {
+      this.socket.addEventListener("message", (e) => observer.next(e));
       return () => this.socket.close();
-    }).pipe(takeUntil(this.$destroy),
-      share(),
-    );
-    source.subscribe(z => {
-       console.log(z);
+    }).pipe(takeUntil(this.$destroy), share());
+    source.subscribe((z) => {
+      console.log(z);
     });
-    source.subscribe(z => {
-       console.log(z);
-    });    
+    source.subscribe((z) => {
+      console.log(z);
+    });
+  }
+  ngOnDestroy(): void {
+    throw new Error("Method not implemented.");
   }
 }
 class WebSockerFake {
